@@ -6,19 +6,14 @@ import android.os.Parcelable;
 import com.annimon.stream.Stream;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 final class PermissionRequest implements Parcelable {
 
-    private static AtomicInteger counter = new AtomicInteger();
-    private static int MAX_VALUE = 128;
     private int requestCode;
     private List<String> permissions;
     private String rationale;
 
-    public PermissionRequest() {
-        requestCode = newCode();
-    }
+    public PermissionRequest() { }
 
     protected PermissionRequest(Parcel in) {
         requestCode = in.readInt();
@@ -26,12 +21,13 @@ final class PermissionRequest implements Parcelable {
         rationale = in.readString();
     }
 
-    private int newCode() {
-        return counter.getAndIncrement() % MAX_VALUE;
-    }
-
     public PermissionRequest withPermission(String permission) {
         permissions.add(permission);
+        return this;
+    }
+
+    public PermissionRequest requestCode(int requestCode) {
+        this.requestCode = requestCode;
         return this;
     }
 
