@@ -3,6 +3,8 @@ package nurisezgin.com.glory;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.annimon.stream.Stream;
+
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -30,6 +32,13 @@ final class PermissionRequest implements Parcelable {
 
     public PermissionRequest withPermission(String permission) {
         permissions.add(permission);
+        return this;
+    }
+
+    public PermissionRequest withPermissions(String[] permissions) {
+        Stream.of(permissions)
+                .forEach(perm -> withPermission(perm));
+
         return this;
     }
 
