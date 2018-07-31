@@ -3,6 +3,7 @@ package nurisezgin.com.glory;
 import android.Manifest;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.rule.ActivityTestRule;
@@ -20,6 +21,7 @@ import org.junit.runner.RunWith;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import static android.os.Build.VERSION_CODES.M;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,7 +30,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * Created by nuri on 31.07.2018
  */
 @RunWith(AndroidJUnit4.class)
-@SdkSuppress(minSdkVersion = 23)
+@SdkSuppress(minSdkVersion = M)
+@RequiresApi(api = M)
 public class GloryActivityTest {
 
     private static final int PERMISSIONS_DIALOG_DELAY = 3000;
@@ -47,7 +50,7 @@ public class GloryActivityTest {
     }
 
     private void revokePermission(String permission) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= M) {
             getInstrumentation().getUiAutomation().executeShellCommand(
                     "pm revoke " + ctx.getPackageName()
                             + " " + permission);
