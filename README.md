@@ -15,7 +15,7 @@ implementation 'nurisezgin.com.android.glory:glory:1.0.0'
         .context(ctx)
         .permissions(permissions)
         .build();
-```java
+```
 
 * Send a permission request.
 ```java
@@ -25,7 +25,7 @@ implementation 'nurisezgin.com.android.glory:glory:1.0.0'
                 // sth...
             }
         });
-```java
+```
 
 * If you want show rationale you can enable on builder. Also Glory has own activity for requesting permission but you can change requester
 through builder and add customized one.
@@ -46,7 +46,7 @@ through builder and add customized one.
 
                 }
             });
-```java
+```
 
 ## Authors
 * **Nuri SEZGIN**-[Email](acnnurisezgin@gmail.com)
