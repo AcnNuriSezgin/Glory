@@ -7,9 +7,9 @@ before_install:
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
   - sdkmanager tools
-  - sdkmanager "system-images;android-24;google_apis;armeabi-v7a"
-  - echo no | avdmanager create avd --force -n test -k "system-images;android-24;google_apis;armeabi-v7a" -f --abi "armeabi-v7a" --tag "google_apis"
-  - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
+  - sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
+  - echo no | avdmanager create avd -n test -k "system-images;android-25;google_apis;armeabi-v7a" -f --abi "armeabi-v7a" --tag "google_apis"
+  - $ANDROID_HOME/emulator/emulator -avd test -no-audio -engine classic -no-window -camera-back none -camera-front none -verbose -qemu -m 512  &
 
 install: ./gradlew clean assemble assembleAndroidTest --stacktrace
 
@@ -29,6 +29,9 @@ branches:
     master
 
 sudo: false
+env:
+  global:
+    - ADB_INSTALL_TIMEOUT=20 # minutes (2 minutes by default)
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
