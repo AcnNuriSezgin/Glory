@@ -2,7 +2,9 @@ package nurisezgin.com.glory;
 
 import android.Manifest;
 import android.content.Context;
+import android.support.annotation.RequiresApi;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.hamcrest.Description;
@@ -13,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 
+import static android.os.Build.VERSION_CODES.M;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -23,6 +26,8 @@ import static org.mockito.Mockito.verify;
  * Created by nuri on 31.07.2018
  */
 @RunWith(AndroidJUnit4.class)
+@SdkSuppress(minSdkVersion = M)
+@RequiresApi(api = M)
 public class GloryTest {
 
     private Context ctx;
