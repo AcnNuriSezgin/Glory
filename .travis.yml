@@ -3,6 +3,13 @@ sudo: false
 jdk:
   - oraclejdk8
 
+notifications:
+  email: false
+
+branches:
+  only:
+    master
+
 before_cache:
  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -58,15 +65,3 @@ before_script:
 script: ./gradlew check connectedCheck --stacktrace
 
 after_success: ./gradlew install bintrayUpload
-
-notifications:
-  email: false
-
-branches:
-  only:
-    master
-
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-

@@ -18,8 +18,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+import nurisezgin.com.glory.testutils.DataHolder;
 
 import static android.os.Build.VERSION_CODES.M;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
@@ -40,7 +42,7 @@ public class GloryActivityTest {
 
     @Rule
     public ActivityTestRule<GloryActivity> mActivityTestRule
-                    = new ActivityTestRule<>(GloryActivity.class, true, false);
+            = new ActivityTestRule<>(GloryActivity.class, true, false);
 
     private Context ctx;
 
@@ -64,18 +66,24 @@ public class GloryActivityTest {
         final String permission = Manifest.permission.READ_SMS;
         revokePermission(permission);
 
-        BlockingQueue<Boolean> queue = new LinkedBlockingQueue<>(1);
+        DataHolder<Boolean> holder = new DataHolder<>();
+        CountDownLatch latch = new CountDownLatch(1);
 
         Glory.builder()
                 .context(ctx)
                 .permission(permission)
                 .build()
                 .request(CallbackFactory.newCallback(
-                        response -> queue.offer(response.shouldAllPermissionsAreGranted())));
+                        response -> {
+                            holder.offer(response.shouldAllPermissionsAreGranted());
+                            latch.countDown();
+                        }
+                ));
 
         applyPermissionStatus(true);
 
-        boolean res = queue.take();
+        latch.await(PERMISSIONS_DIALOG_DELAY * 2, TimeUnit.MILLISECONDS);
+        boolean res = holder.take();
 
         assertThat(res, is(expected));
     }
@@ -87,24 +95,29 @@ public class GloryActivityTest {
         final String permission = Manifest.permission.ACCESS_FINE_LOCATION;
         revokePermission(permission);
 
-        BlockingQueue<Boolean> queue = new LinkedBlockingQueue<>(1);
+        DataHolder<Boolean> holder = new DataHolder<>();
+        CountDownLatch latch = new CountDownLatch(1);
 
         Glory.builder()
                 .context(ctx)
                 .permission(permission)
                 .build()
                 .request(CallbackFactory.newCallback(
-                        response -> queue.offer(response.shouldAllPermissionsAreGranted())));
+                        response -> {
+                            holder.offer(response.shouldAllPermissionsAreGranted());
+                            latch.countDown();
+                        }));
 
         applyPermissionStatus(false);
 
-        boolean res = queue.take();
+        latch.await(PERMISSIONS_DIALOG_DELAY * 2, TimeUnit.MILLISECONDS);
+        boolean res = holder.take();
 
         assertThat(res, is(expected));
     }
 
     public void applyPermissionStatus(boolean isAllow) {
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 try {
