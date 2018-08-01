@@ -7,11 +7,11 @@ public final class DataHolder<Data> {
 
     private Data data;
 
-    public void offer(Data data) {
+    public synchronized void offer(Data data) {
         this.data = data;
     }
 
-    public Data take() {
+    public synchronized Data take() {
         return data;
     }
 
