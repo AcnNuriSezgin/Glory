@@ -14,6 +14,7 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,6 +60,7 @@ public class GloryActivityTest {
         }
     }
 
+    @Ignore
     @Test
     public void should_GrantPermissionCorrect() throws InterruptedException {
         final boolean expected = true;
@@ -88,6 +90,7 @@ public class GloryActivityTest {
         assertThat(res, is(expected));
     }
 
+    @Ignore
     @Test
     public void should_DiscardPermissionCorrect() throws InterruptedException {
         final boolean expected = Utils.isEqualAndGreaterThanApiM() ? false : true;
