@@ -24,7 +24,7 @@ public class Response {
         return requestCode;
     }
 
-    public Response requestCode(int requestCode) {
+    private Response requestCode(int requestCode) {
         this.requestCode = requestCode;
         return this;
     }
@@ -33,7 +33,7 @@ public class Response {
         return grantedPermissions;
     }
 
-    public Response grantedPermissions(String[] grantedPermissions) {
+    private Response grantedPermissions(String[] grantedPermissions) {
         this.grantedPermissions = grantedPermissions;
         return this;
     }
@@ -42,7 +42,7 @@ public class Response {
         return deniedPermissions;
     }
 
-    public Response deniedPermissions(String[] deniedPermissions) {
+    private Response deniedPermissions(String[] deniedPermissions) {
         this.deniedPermissions = deniedPermissions;
         return this;
     }

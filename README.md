@@ -19,12 +19,9 @@ implementation 'nurisezgin.com.glory:glory:1.0.0'
 
 * Send a permission request.
 ```java
-    glory.request(new CallbackFactory.Callback() {
-            @Override
-            public void onPermissionResult(Response response) {
-                // sth...
-            }
-        });
+    glory.request(CallbackFactory.newCallback((response -> {
+        // sth...
+    })));
 ```
 
 * If you want show rationale you can enable on builder. Also Glory has own activity for requesting permission but you can change requester
@@ -40,12 +37,9 @@ through builder and add customized one.
             .permissions(permissions)
             .requester(customRequester) // optional
             .build()
-            .request(new CallbackFactory.Callback() {
-                @Override
-                public void onPermissionResult(Response response) {
-
-                }
-            });
+            .request(CallbackFactory.newCallback((response -> {
+                // sth...
+            })));
 ```
 
 ## Authors
