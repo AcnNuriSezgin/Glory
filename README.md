@@ -4,7 +4,7 @@ Runtime permission requester, can request dangerous permissions through Glory.
 ## Prerequisites
 First, dependency must be added to build.gradle file.
 ```groovy
-implementation 'nurisezgin.com.glory:glory:1.0.0'
+implementation 'nurisezgin.com.glory:glory:1.0.1'
 ```
 
 ## How To Use
