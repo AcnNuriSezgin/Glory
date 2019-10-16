@@ -1,6 +1,7 @@
 package nurisezgin.com.glory;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import static nurisezgin.com.glory.Utils.anyOfNeedRationale;
 import static nurisezgin.com.glory.Utils.filter;
 import static nurisezgin.com.glory.Utils.isEqualAndGreaterThanApiM;
 
-public class GloryActivity extends AppCompatActivity {
+public class GloryActivity extends Activity {
 
     public static final String REQ_KEY = "perm_req";
     private Request request;
