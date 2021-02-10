@@ -1,5 +1,5 @@
 # Glory
-Runtime permission requester, can request dangerous permissions through Glory.
+Runtime permission requester, request dangerous permissions through Glory easily.
 
 ## Prerequisites
 First, dependency must be added to build.gradle file.
@@ -24,7 +24,7 @@ implementation 'nurisezgin.com.glory:glory:1.0.2'
     })));
 ```
 
-* If you want show rationale you can enable on builder. Also Glory has own activity for requesting permission but you can change requester
+* If you want to show rationale you can enable on builder. Also Glory has own activity for requesting permission but you can change requester
 through builder and add customized one.
 ```java
     final String[] permissions = {Manifest.permission.READ_SMS,
